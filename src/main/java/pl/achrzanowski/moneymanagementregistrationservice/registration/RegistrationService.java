@@ -3,7 +3,6 @@ package pl.achrzanowski.moneymanagementregistrationservice.registration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -12,13 +11,10 @@ import javax.transaction.Transactional;
 public class RegistrationService {
 
     @Autowired
-    private UserDetailsManager userDetailsManager;
-
-    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Transactional
-    public void registerUser(RegistrationDTO registrationDTO){
+    public void registerUser(RegistrationDTO registrationDTO) {
         String createUserSql = "insert into users (username, password, enabled) values (?,?, CAST(? AS bit))";
         jdbcTemplate.update(createUserSql, ps -> {
             ps.setString(1, registrationDTO.getUsername());
