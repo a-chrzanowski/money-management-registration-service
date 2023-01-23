@@ -12,6 +12,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
                 .authorizeRequests()
+                .mvcMatchers("/captcha").hasAuthority("SCOPE_registration.access")
                 .mvcMatchers("/registration").hasAuthority("SCOPE_registration.access")
                 .anyRequest().authenticated()
                 .and()
