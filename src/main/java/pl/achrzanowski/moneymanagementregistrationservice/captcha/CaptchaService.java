@@ -14,7 +14,7 @@ public class CaptchaService {
     private String captchaServiceUrl;
 
     public Captcha getNew(){
-        return webClient.get().uri(captchaServiceUrl + "/generateCaptcha")
+        return webClient.get().uri(captchaServiceUrl + "/generate")
                 .retrieve()
                 .bodyToMono(Captcha.class)
                 .block();
